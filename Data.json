@@ -1,0 +1,11 @@
+
+{
+    "title": "한국사 퀴즈",
+    "img": "quest/korea_history_quiz/thumbnail.jpg",
+    "description": "한국사 인증",
+    "type": "quiz",
+    "keywords": "",
+    "category": "strength",
+    "quest_step_max": "5",
+    "reward_exp": "100"
+}

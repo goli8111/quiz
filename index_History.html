@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>한국사 퀴즈</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Include jQuery Mobile stylesheets -->
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+  <!-- Include the jQuery library -->
+  <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+  <!-- Include the jQuery Mobile library -->
+  <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+  <!-- Include the boostrap library -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="quiz_ui.js"></script>
+  <script type="text/javascript" src="countdown.js"></script>
+  <script type="text/javascript" src="score.js"></script>
+  <script type="text/javascript" src="QuizDataLogic.js"></script>
+
+  <script type="text/javascript" src="QuizData_History.js"></script>
+
+  <style>
+    .progress {
+      position: relative;
+    }
+
+    .bar {
+      z-index: 1;
+      position: absolute;
+    }
+
+    .progress span {
+      position: absolute;
+      top: 0;
+      z-index: 2;
+      text-align: center;
+      width: 100%;
+      color: black;
+    }
+
+    .fast-ease-in-out {
+      -webkit-transition: width 100ms ease-in-out;
+      -moz-transition: width 100ms ease-in-out;
+      -ms-transition: width 100ms ease-in-out;
+      -o-transition: width 100ms ease-in-out;
+      transition: width 100ms ease-in-out;
+    }
+
+    .result-form {
+      margin: auto;
+      text-align: center;
+    }
+
+    .result-confirm-button {
+      margin: auto;
+      width: 80% !important;
+      border: 1px solid;
+      border-radius: 0px !important;
+      padding: 10px;
+      box-shadow: 5px 10px #888888;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="question-form">
+    <p style="text-align:left;">
+      <font size="2">현재</font>
+      <font size="4"><strong><span id="current_score">0</span>점</strong></font>
+      <font size="2"><span style="float:right;"><span id="goal_score">0</span>점 달성시 클리어</span></font>
+    </p>
+
+    <p style="text-align:left;">
+      <font size="5">#<span id="quiz_count_index">1</span></font>
+      <font size="4"> O <span id="right_answer_score"></span>점</font>
+      <font size="4"> X <span id="wrong_answer_score"></span>점</font>
+    </p>
+
+    <h3 class="ui-bar ui-bar-a ui-corner-all" id='question'></h3>
+    <h5 id='sub_question_1' style="padding:0px 20px;"></h5>
+    <h5 id='sub_question_2' style="padding:0px 20px;"></h5>
+
+    <div id='quiz_type_radio_form'>
+      <form>
+        <label id='radio-choice-label-1'>
+          <input type="radio" name="radio-choice" id="radio-choice-1" value="1">
+          <div id="radio-choice-text-1"></div>
+        </label>
+        <label id='radio-choice-label-2'>
+          <input type="radio" name="radio-choice" id="radio-choice-2" value="2">
+          <div id="radio-choice-text-2"></div>
+        </label>
+        <label id='radio-choice-label-3'>
+          <input type="radio" name="radio-choice" id="radio-choice-3" value="3">
+          <div id="radio-choice-text-3"></div>
+        </label>
+        <label id='radio-choice-label-4'>
+          <input type="radio" name="radio-choice" id="radio-choice-4" value="4">
+          <div id="radio-choice-text-4"></div>
+        </label>
+        <label id='radio-choice-label-5'>
+          <input type="radio" name="radio-choice" id="radio-choice-5" value="5">
+          <div id="radio-choice-text-5"></div>
+        </label>
+        <label id='radio-choice-label-6'>
+          <input type="radio" name="radio-choice" id="radio-choice-6" value="6">
+          <div id="radio-choice-text-6"></div>
+        </label>
+      </form>
+    </div>
+
+    <div id='quiz_type_checkbox_form'>
+      <form>
+        <label id='checkbox-choice-label-1'>
+          <input type="checkbox" name="checkbox-choice" id="checkbox-choice-1" value="1">
+          <div id="checkbox-choice-text-1"></div>
+        </label>
+        <label id='checkbox-choice-label-2'>
+          <input type="checkbox" name="checkbox-choice" id="checkbox-choice-2" value="2">
+          <div id="checkbox-choice-text-2"></div>
+        </label>
+        <label id='checkbox-choice-label-3'>
+          <input type="checkbox" name="checkbox-choice" id="checkbox-choice-3" value="3">
+          <div id="checkbox-choice-text-3"></div>
+        </label>
+        <label id='checkbox-choice-label-4'>
+          <input type="checkbox" name="checkbox-choice" id="checkbox-choice-4" value="4">
+          <div id="checkbox-choice-text-4"></div>
+        </label>
+        <label id='checkbox-choice-label-5'>
+          <input type="checkbox" name="checkbox-choice" id="checkbox-choice-5" value="5">
+          <div id="checkbox-choice-text-5"></div>
+        </label>
+        <label id='checkbox-choice-label-6'>
+          <input type="checkbox" name="checkbox-choice" id="checkbox-choice-6" value="6">
+          <div id="checkbox-choice-text-6"></div>
+        </label>
+      </form>
+    </div>
+
+    <div id='quiz_type_text_form'>
+      <form>
+        <label>
+          <input type="text" name="text-choice" id="text-choice" value="">
+        </label>
+      </form>
+    </div>
+
+    <br />
+    <div class="progress" id="result-progressbar" style="height:50px" onclick="send_result()">
+      <span>
+        <font size="4">제출하기</font><br />
+        <font size="2">남은시간</font>
+        <font size="2" id="progress-bar-timer-text">0</font>초
+      </span>
+      <div id="progress-bar-timer" class="progress-bar fast-ease-in-out" role="progressbar" style="width: 50%"
+        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+  </div>
+  <div id="result-form" class="result-form">
+    <!--     <div data-role="header" data-theme="a">
+          <h1>결과</h1>
+        </div>
+        <div role="main" class="ui-content">
+              <h3 class="ui-title" id="ResultDialog-text"></h3>
+        </div> -->
+    <div role="main" class="ui-content">
+      <h4>최종 점수</h4>
+      <u>
+        <h1 id="result-form-total-score"></h1>
+      </u>
+      <h4>기준 점수</h4>
+      <h4 id="result-form-goal-score"></h4>
+      <br />
+      <br />
+      <h4 id="result-form-reward"></h4>
+    </div>
+    <button type="button" class="result-confirm-button" onclick="iframe_finish()">확인</button>
+  </div>
+  </div>
+
+  <div data-role="popup" id="result-popup" class="ui-content" data-theme="a">
+    <h1 id="result-popup-text"></h1>
+  </div>
+
+  <!-- <a href="#result-correct" data-position-to="window" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup"></a>
+  <a href="#result-incorrect" data-position-to="window" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup"></a> -->
+  <!-- <div data-role="popup" id="result-popup" class="ui-content" data-theme="a">
+    <h1 id="result-popup-text"></h1>
+  </div> -->
+
+  <!-- <a href="#message_box" data-position-to="window" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop">Basic Popup</a>  -->
+  <div data-role="popup" id="message_box" data-tolerance="0">
+    <p id="message_box_text">asdf</p>
+  </div>
+
+
+</body>
+
+</html>
