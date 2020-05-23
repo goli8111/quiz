@@ -47,7 +47,7 @@ function update_scene() {
     question_fade_in();
 }
 function send_question_time_over() {
-    check_result_value(_active_quiz_data);
+    check_result_value(_active_quiz_data, _active_quiz_data.right_answer, _active_quiz_data.user_answer);
 }
 
 function send_result() {
@@ -68,7 +68,7 @@ function send_radio_result() {
 
     if(checkResult != undefined) {
         _active_quiz_data.user_answer = checkResult.value;
-        check_result_value(_active_quiz_data);
+        check_result_value(_active_quiz_data, _active_quiz_data.right_answer, _active_quiz_data.user_answer);
     } 
     else { 
         showMessageBox("정답을 선택해 주세요"); 
@@ -88,7 +88,7 @@ function send_checkbox_result() {
     }
     if(checkRrsult != undefined && checkRrsult.length > 0) {
         _active_quiz_data.user_answer = checkRrsult;
-        check_result_value(_active_quiz_data);
+        check_result_value(_active_quiz_data, _active_quiz_data.right_answer, _active_quiz_data.user_answer);
     } 
     else { 
         showMessageBox("정답을 선택해 주세요"); 
@@ -96,22 +96,36 @@ function send_checkbox_result() {
 }
 
 function send_text_result() {
-    var text_element =document.getElementById('text-choice');
+    var text_element = document.getElementById('text-choice');
     if(text_element != undefined && text_element.value.length > 0) {
         _active_quiz_data.user_answer = text_element.value;
-        check_result_value(_active_quiz_data);
+        // 여러개의 정답을 체크해서 유저가 입력한게 정답이면 그것을 정답으로 전달
+        var targetanswer = undefined;
+        var answertList = _active_quiz_data.right_answer.split(",");
+        // console.log('user answer:'+_active_quiz_data.user_answer)
+        // console.log('answertList');
+        // console.log(answertList);
+        answertList.forEach(function(answer){ 
+            console.log(answer);
+            if (answer == _active_quiz_data.user_answer) {
+                targetanswer = answer; 
+            }
+        });
+        //console.log('answer value : ' + targetanswer);
+
+        check_result_value(_active_quiz_data, targetanswer, _active_quiz_data.user_answer);
     } 
     else { 
         showMessageBox("정답을 입력해 주세요"); 
     }
 }
 
-function check_result_value(quiz_data) {
+function check_result_value(quiz_data, right_value, input_value) {
     clear_question_time_limit();
     question_fade_out();
 
-    right_value = quiz_data.right_answer;
-    input_value = quiz_data.user_answer;
+    // right_value = quiz_data.right_answer;
+    // input_value = quiz_data.user_answer;
 
     var result_text;
     var slide_type;
