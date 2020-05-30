@@ -41,7 +41,6 @@ function update_scene() {
         return;
     }
     _active_quiz_data = quiz_data;
-    reset_quest_answer_ui();
     showQuizFormType(_active_quiz_data.form_type);
     update_quest_ui_text(_active_quiz_index, _active_quiz_data);
     set_question_time_limit(_active_quiz_data.time_limit*1000, send_question_time_over);
