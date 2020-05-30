@@ -41,6 +41,7 @@ function update_scene() {
         return;
     }
     _active_quiz_data = quiz_data;
+    reset_quest_answer_ui();
     showQuizFormType(_active_quiz_data.form_type);
     update_quest_ui_text(_active_quiz_index, _active_quiz_data);
     set_question_time_limit(_active_quiz_data.time_limit*1000, send_question_time_over);
@@ -152,5 +153,11 @@ function check_result_value(quiz_data, right_value, input_value) {
 }
 
 function iframe_finish() {
-    window.parent.postMessage("onBack", "*");
+    console.log('goal score:' + get_goal_score() + ', current score:' + get_score());
+    if (get_goal_score()<=get_score()) {
+        window.parent.postMessage("onBack", "*");
+    }
+    else {
+        window.parent.postMessage("onSuccess", "*");
+    }
 }
