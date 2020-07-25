@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/quiz/static/css/main.aac98e16.chunk.css",
-    "main.js": "/quiz/static/js/main.a160b5dd.chunk.js",
-    "main.js.map": "/quiz/static/js/main.a160b5dd.chunk.js.map",
+    "main.js": "/quiz/static/js/main.596ac23b.chunk.js",
+    "main.js.map": "/quiz/static/js/main.596ac23b.chunk.js.map",
     "runtime-main.js": "/quiz/static/js/runtime-main.1d76b28e.js",
     "runtime-main.js.map": "/quiz/static/js/runtime-main.1d76b28e.js.map",
     "static/js/2.b09c9a47.chunk.js": "/quiz/static/js/2.b09c9a47.chunk.js",
     "static/js/2.b09c9a47.chunk.js.map": "/quiz/static/js/2.b09c9a47.chunk.js.map",
     "index.html": "/quiz/index.html",
-    "precache-manifest.4f71afaf1a34f5a2ec108e8e7dcd1b5f.js": "/quiz/precache-manifest.4f71afaf1a34f5a2ec108e8e7dcd1b5f.js",
+    "precache-manifest.e919eab5e68c62bdd50a2f25a12d8d64.js": "/quiz/precache-manifest.e919eab5e68c62bdd50a2f25a12d8d64.js",
     "service-worker.js": "/quiz/service-worker.js",
     "static/css/main.aac98e16.chunk.css.map": "/quiz/static/css/main.aac98e16.chunk.css.map",
     "static/js/2.b09c9a47.chunk.js.LICENSE.txt": "/quiz/static/js/2.b09c9a47.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.1d76b28e.js",
     "static/js/2.b09c9a47.chunk.js",
     "static/css/main.aac98e16.chunk.css",
-    "static/js/main.a160b5dd.chunk.js"
+    "static/js/main.596ac23b.chunk.js"
   ]
 }
